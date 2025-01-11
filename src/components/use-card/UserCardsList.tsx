@@ -14,10 +14,17 @@ export const UserCardsList: FC<Props> = ({listLength})=> {
     return (
         <div>
             {
-                Array(listLength)
-                    .fill(null)
-                    .map((item, index) => <div key={index}>user {index}</div>)
+                users
+                    .map((item) => (
+                        <div key={item.id}>{item.id} --- {item.name}</div>
+                    ))
             }
+
+            {/*{*/}
+            {/*    Array(listLength)*/}
+            {/*        .fill(null)*/}
+            {/*        .map((item, index) => <div key={index}>user {index}</div>)*/}
+            {/*}*/}
         </div>
     );
 };

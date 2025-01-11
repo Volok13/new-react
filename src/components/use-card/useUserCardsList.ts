@@ -14,6 +14,8 @@ export const UseUserCardsList = ({listLength}: Input) => {
     const [users, setUsers] = useState<any[] | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
+    // const newusersList = null;
+
     useEffect(() => {
         setLoading(true);
         fetch('https://jsonplaceholder.typicode.com/users')
