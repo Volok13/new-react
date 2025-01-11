@@ -1,20 +1,15 @@
-import {FC, useEffect} from "react";
+import {FC} from "react";
+import useUserCardsList from "./useUserCardsList.ts";
 
 interface Props {
  listLength: number;
 }
 
 export const UserCardsList: FC<Props> = ({listLength})=> {
-    useEffect(() => {
+    const {users, loading} = useUserCardsList({listLength});
 
-    console.log('subscribe')
-
-    return () => {
-        console.log('unsubscribe')
-     }
-    }, [listLength]);
-
-
+    if(!users && loading) return <div>loading</div>;
+    if(!users) return <div>Data not found</div>;
 
     return (
         <div>
