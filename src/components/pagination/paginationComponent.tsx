@@ -3,7 +3,7 @@ import {useSearchParams} from "react-router";
 
 const PaginationComponent = () => {
 
-    const [query, setQuery] = useSearchParams({pg:'100500'})
+    const [query, setQuery] = useSearchParams({pg:'200'})
 
     return (
         <div>

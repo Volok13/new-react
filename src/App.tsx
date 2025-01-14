@@ -10,7 +10,6 @@ const App = () => {
   return (
     <>
         <Some/>
-        hello
       <PaginationComponent/>
     </>
   )

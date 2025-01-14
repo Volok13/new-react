@@ -1,23 +1,29 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router";
-import {pgUrl} from "../../service/api.service.tsx";
-
+import {getAllUsers} from "../../service/api.service.tsx";
+import {IUser} from "../../models/IUser.ts";
+import UserComponent from "../../user/UserComponent.tsx";
 
 const Some = () => {
-    const [query, setQuery] = useSearchParams();
-    useEffect(() => {
 
-        const pg = query.get('pg');
-        console.log(pg);
-        pgUrl.pgAll()
-            .then(value => {
-                console.log(value);
-            })
+
+    const [users, setUsers] = useState<IUser[]>([])
+    const [query] = useSearchParams();
+    useEffect(() => {
+        // const pg = query.get('pg');
+        getAllUsers(query.get('pg') || '1')
+            .then(value =>
+                setUsers(value.data));
     }, [query])
 
     return (
         <div>
-            Some
+            {
+                users.map(value =>
+                    (<UserComponent
+                        key={value.id}
+                        item={value}/>))
+            }
         </div>
     );
 };
