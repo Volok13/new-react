@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import LeftBranch from "./components/LeftBranch.tsx";
+import RightBranch from "./components/RightBranch.tsx";
+import MyContext, {init} from "./contetx/MyContext.tsx";
+import {useState} from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [counter, setCounter] = useState<number>(0);//основне сховище
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+        <MyContext.Provider value={{
+            counterValue: counter,//не стале значення тому і змінюется
+            //якщо використовувати контекст в якості сховища то обовязково його потрібно завязувати на useState і завязувати цілком тому що якщо буде тільки  значення змін не буде
+            increment: (obj) => {
+                console.log(obj)
+                setCounter(++obj);
+                console.log(obj)
+            }
+
+        }}>
+      <LeftBranch/>
+      <RightBranch/>
+        </MyContext.Provider>
+        {/*//визначаємо в якому сховиши лежать компоненти тому обготраємо*/}
+
+    </div>
   )
 }
 
 export default App
+
+
+
+//можна створювати декілька контекстів і зєднувати між собою
+
